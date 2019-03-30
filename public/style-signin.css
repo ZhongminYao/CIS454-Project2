@@ -1,0 +1,102 @@
+.inputBox h1{
+  font:weight;
+  font-size: 3.5em;
+  font-style: italic;
+  text-transform: capitalize;
+  font-weight: 1000;
+  color: gold;
+
+}
+
+
+body{
+  margin: 0px;
+  padding: 100%;
+  font-family: "Times New Roman", Times, serif;
+  background: #006600;
+}
+
+
+
+.inputBox{
+  width: 500px;
+  padding: 80px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+
+}
+
+.inputBox input[id = "email"]{
+  border: 2px solid #5c85d6;
+  display: block;
+  margin: 1.5em auto;
+  text-align: center;
+  padding: 10px 20px;
+  width: 15em;
+  border-radius: 2.5em;
+  transition: 0.3s;
+}
+
+.inputBox input[id = "email"]:focus{
+  width: 25em;
+  border: 2px solid #b51ec9;
+}
+
+.inputBox input[id = "password"]{
+  border: 2px solid #5c85d6;
+  display: block;
+  margin: 1.5em auto;
+  text-align: center;
+  padding: 10px 20px;
+  width: 15em;
+  border-radius: 2.5em;
+  transition: 0.3s;
+}
+
+.inputBox input[id = "password"]:focus{
+  width: 25em;
+  border: 2px solid #b51ec9;
+
+}
+
+.inputBox button[id = "signin"]{
+  border: 2px solid #5c85d6;
+  display: block;
+  
+  text-align: center;
+  padding: 10px 20px;
+  margin: 1em auto;
+  width: 8em;
+  border-radius: 2.5em;
+  transition: 0.3s;
+}
+
+.inputBox button[id = "signin"]:hover{
+  width: 10em;
+  padding: 15px 20px;
+  background: #bf80ff;
+  border: 3px solid #fc0606;
+
+}
+.inputBox button[id = "signup"]{
+  border: 2px solid #5c85d6;
+  display: block;
+  
+  text-align: center;
+  padding: 10px 20px;
+  margin: 1em auto;
+  width: 8em;
+  border-radius: 2.5em;
+  transition: 0.3s;
+}
+
+.inputBox button[id = "signup"]:hover{
+  width: 10em;
+  padding: 15px 20px;
+  background: #bf80ff;
+  border: 3px solid #fc0606;
+
+}
