@@ -34,7 +34,7 @@
     var password = input_password.value;
     var auth = firebase.auth();
 
-    var action = auth.signInWithEmailAndPassword(email,password);
+    var action = auth.createUserWithEmailAndPassword(email,password);
     //action.then(user => console.l)
     action.catch(e => console.log(e.message));
   });

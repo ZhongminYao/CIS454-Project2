@@ -9,6 +9,7 @@
     <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
 <script>
   // Initialize Firebase
+
   var config = {
     apiKey: "AIzaSyCJRvvsqkPq45KpBQ_k57bzG8a36IASZEg",
     authDomain: "volunteering-454.firebaseapp.com",
@@ -29,6 +30,11 @@
     <script defer src="/__/firebase/5.9.1/firebase-storage.js"></script>
     initialize the SDK after all desired features are loaded 
     <script defer src="/__/firebase/init.js"></script>  -->
+
+    <!-- Install the firebaseUI in order to utilize google signin -->
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
   </head>
   <body>
 
@@ -37,7 +43,7 @@
       <input type="text" name="email" id="email" placeholder="Your email" style="font-size:110%">
       <input type="password" name="password" id="password" placeholder="Your password" style="font-size:110%">
       <button type="submit" id="signin" name='signin' >Sign In</button>  
-      <button type="submit" id="signup" name='signup' >Sign Up</a> </button>    
+      <button type="submit" id="signup" name='signup' >Sign Up</button>    
     </div>
  
     <script src=signin.js></script>
