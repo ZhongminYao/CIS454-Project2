@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
+    <title> SignIn</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style-signin.css">
 
     <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
 <script>
@@ -17,221 +19,27 @@
   };
   firebase.initializeApp(config);
 </script>
-
+    
     <!-- update the version number as needed -->
-    <script defer src="/__/firebase/5.9.1/firebase-app.js"></script>
+    <!-- <script defer src="/__/firebase/5.9.1/firebase-app.js"></script> -->
     <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/5.9.1/firebase-auth.js"></script>
+    <!-- <script defer src="/__/firebase/5.9.1/firebase-auth.js"></script>
     <script defer src="/__/firebase/5.9.1/firebase-database.js"></script>
     <script defer src="/__/firebase/5.9.1/firebase-messaging.js"></script>
     <script defer src="/__/firebase/5.9.1/firebase-storage.js"></script>
-    <!-- initialize the SDK after all desired features are loaded -->
-    <script defer src="/__/firebase/init.js"></script>
-    <script type="text/javascript">
-      /**
-       * Handles the sign in button press.
-       */
-      function toggleSignIn() {
-        if (firebase.auth().currentUser) {
-          // [START signout]
-          firebase.auth().signOut();
-          // [END signout]
-        } else {
-          var email = document.getElementById('email-block').value;
-          var password = document.getElementById('password-block').value;
-          if (email.length < 4) {
-            alert('Please enter an email address.');
-            return;
-          }
-          if (password.length < 4) {
-            alert('Please enter a password.');
-            return;
-          }
-          // Sign in with email and pass.
-          // [START authwithemail]
-          firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // [START_EXCLUDE]
-            if (errorCode === 'auth/wrong-password') {
-              alert('Wrong password.');
-            } else {
-              alert(errorMessage);
-            }
-            console.log(error);
-            document.getElementById('signin').disabled = false;
-            // [END_EXCLUDE]
-          });
-          // [END authwithemail]
-        }
-        document.getElementById('signin').disabled = true;
-      }
-      /**
-       * Handles the sign up button press.
-       */
-      function handleSignUp() {
-        var email = document.getElementById('email-block').value;
-        var password = document.getElementById('password-block').value;
-        if (email.length < 4) {
-          alert('Please enter an email address.');
-          return;
-        }
-        if (password.length < 4) {
-          alert('Please enter a password.');
-          return;
-        }
-        // Sign in with email and pass.
-        // [START createwithemail]
-        firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-          // Handle Errors here.
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          // [START_EXCLUDE]
-          if (errorCode == 'auth/weak-password') {
-            alert('The password is too weak.');
-          } else {
-            alert(errorMessage);
-          }
-          console.log(error);
-          // [END_EXCLUDE]
-        });
-        // [END createwithemail]
-      }
-      /**
-       * Sends an email verification to the user.
-       */
-      function sendEmailVerification() {
-        // [START sendemailverification]
-        firebase.auth().currentUser.sendEmailVerification().then(function() {
-          // Email Verification sent!
-          // [START_EXCLUDE]
-          alert('Email Verification Sent!');
-          // [END_EXCLUDE]
-        });
-        // [END sendemailverification]
-      }
-      function sendPasswordReset() {
-        var email = document.getElementById('email-block').value;
-        // [START sendpasswordemail]
-        firebase.auth().sendPasswordResetEmail(email).then(function() {
-          // Password Reset Email Sent!
-          // [START_EXCLUDE]
-          alert('Password Reset Email Sent!');
-          // [END_EXCLUDE]
-        }).catch(function(error) {
-          // Handle Errors here.
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          // [START_EXCLUDE]
-          if (errorCode == 'auth/invalid-email') {
-            alert(errorMessage);
-          } else if (errorCode == 'auth/user-not-found') {
-            alert(errorMessage);
-          }
-          console.log(error);
-          // [END_EXCLUDE]
-        });
-        // [END sendpasswordemail];
-      }
-    </script>
-
-    <style>
-      *{      font-family: serif;
-              color: blue;  
-  font-weight: 800;
-  } 
-      
-      body {
-           background-image:url('pic1.jpg');
-     background-size: cover;
-           
-
-           }
-      
-      a {
-         text-decoration:none; 
-         color:blue;
-         }     
-      
-      .link {
-          color : #FF0000;
-            }
-      
-      h1{  
-           margin-top: 200px;
-           margin-left: 440px;
-           display: block;
-           font-family: serif; 
-         }
-      
-      #text-block{
-          margin-top:20px;
-          margin-left:90px;
-          display: block;
-          
-        }
-
-      #password-block{
-          margin-top:20px;
-          margin-left:90px;
-          display: block;
-        }
-      
-     #submit-button {
-        margin-left:90px;
-        background: transparent;
-        }
-
-     #signup-button {
-        margin-left:10px;
-        background: transparent; 
-        
-        }
-     
-     .select{
-        margin-left: 530px;
-        }
-    </style> 
+    initialize the SDK after all desired features are loaded 
+    <script defer src="/__/firebase/init.js"></script>  -->
   </head>
   <body>
 
-    <div class="login_input">
-      <h1> Volunteering Application
-      <input type = "text" placeholder="Your email" id="email-block" name='text'>
-      <input type = "password" placeholder="Your password" id="password-block" name='pwd'>
-      <button type="submit" id="submit-button" name='signin' >Sign in</button>  
-      <button type="submit" id="signup-button" name='signup' >Register</a> </button>
+    <div class="inputBox"> 
+      <h1> Welcome to our app</h1>
+      <input type="text" name="email" id="email" placeholder="Your email" style="font-size:110%">
+      <input type="password" name="password" id="password" placeholder="Your password" style="font-size:110%">
+      <button type="submit" id="signin" name='signin' >Sign In</button>  
+      <button type="submit" id="signup" name='signup' >Sign Up</a> </button>    
     </div>
-      <div class="select">
-        Visit as :
-        <select> 
-         <option value = "coordinator">Coordinator</option>
-         <option value = "volunteer">Volunteer</option>
-        </select>
-      </div>
  
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-
-        try {
-          let app = firebase.app();
-          let features = ['auth', 'database', 'messaging', 'storage'].filter(feature => typeof app[feature] === 'function');
-          document.getElementById('load').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
-    </script>
+    <script src=signin.js></script>
   </body>
 </html>
