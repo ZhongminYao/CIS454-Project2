@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title> SignIn</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style-signin.css">
+
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCJRvvsqkPq45KpBQ_k57bzG8a36IASZEg",
+    authDomain: "volunteering-454.firebaseapp.com",
+    databaseURL: "https://volunteering-454.firebaseio.com",
+    projectId: "volunteering-454",
+    storageBucket: "volunteering-454.appspot.com",
+    messagingSenderId: "470008611776"
+  };
+  firebase.initializeApp(config);
+</script>
+    
+    <!-- update the version number as needed -->
+    <!-- <script defer src="/__/firebase/5.9.1/firebase-app.js"></script> -->
+    <!-- include only the Firebase features as you need -->
+    <!-- <script defer src="/__/firebase/5.9.1/firebase-auth.js"></script>
+    <script defer src="/__/firebase/5.9.1/firebase-database.js"></script>
+    <script defer src="/__/firebase/5.9.1/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/5.9.1/firebase-storage.js"></script>
+    initialize the SDK after all desired features are loaded 
+    <script defer src="/__/firebase/init.js"></script>  -->
+
+    <!-- Install the firebaseUI in order to utilize google signin -->
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+  </head>
+  <body>
+      
+   <div class="wrapper">
+     <div class="inputBox">
+    
+      <h1> Welcome to our app</h1>
+      <input type="text" name="email" id="email" placeholder="Your email" style="font-size:110%">
+      <input type="password" name="password" id="password" placeholder="Your password" style="font-size:110%">
+      <button type="submit" id="signin" name='signin' >Sign In</button>  
+      <button type="submit" id="signup" name='signup' >Sign Up</a> </button>
+
+   </div> 
+
+<ul class="bg-bubbles">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  
+   </div>
+</html>
