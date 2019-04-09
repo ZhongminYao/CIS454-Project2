@@ -26,6 +26,7 @@
     <meta name="google-signin-client_id" content="470008611776-0ebvss0hkb1tgh8g113t74hknbd8gmmv.apps.googleusercontent.com">
 
 
+
     
     <!-- update the version number as needed -->
     <!-- <script defer src="/__/firebase/5.9.1/firebase-app.js"></script> -->
@@ -43,6 +44,7 @@
 
   </head>
   <body>
+
     
     <!-- The google sign-in method is leanred from google developer website: https://developers.google.com/identity/sign-in/web/sign-in#before_you_begin;
     https://developers.google.com/identity/sign-in/web/people;
@@ -65,12 +67,15 @@
       }
     </script>
 
-    
-    <div class="inputBox"> 
+      
+   <div class="wrapper">
+     <div class="inputBox">
+
       <h1> Welcome to our app</h1>
       <input type="text" name="email" id="email" placeholder="Your email" style="font-size:110%">
       <input type="password" name="password" id="password" placeholder="Your password" style="font-size:110%">
       <button type="submit" id="signin" name='signin' >Sign In</button>  
+      
       <button type="submit" id="signup" name='signup' >Sign Up</button>    
     </div>
     
@@ -98,6 +103,7 @@
       }
     </script>
 
+    <!-- Sign out button, which will be implemented to all pages-->
     <a href="#" onclick="signOut();">Sign out</a>
     <script>
       function signOut() {
@@ -112,4 +118,20 @@
  
     <script src=signin.js></script>
   </body>
+</html>
+
+<ul class="bg-bubbles">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  
+   </div>
 </html>
