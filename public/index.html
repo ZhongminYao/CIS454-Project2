@@ -27,7 +27,30 @@
 
 
 
-    
+    <style>
+      .popB {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.wordsInPopB {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+    </style>
     <!-- update the version number as needed -->
     <!-- <script defer src="/__/firebase/5.9.1/firebase-app.js"></script> -->
     <!-- include only the Firebase features as you need -->
@@ -54,6 +77,7 @@
       function onSignIn(googleUser) {
         // Useful data for your client-side scripts:
         var profile = googleUser.getBasicProfile();
+        //document.getElementById("fullname").innerHTML = (profile.getName()).toString();
         console.log("ID: " + profile.getId()); // Don't send this directly to your server!
         console.log('Full Name: ' + profile.getName());
         console.log('Given Name: ' + profile.getGivenName());
@@ -75,17 +99,37 @@
       <input type="text" name="email" id="email" placeholder="Your email" style="font-size:110%">
       <input type="password" name="password" id="password" placeholder="Your password" style="font-size:110%">
       <button type="submit" id="signin" name='signin' >Sign In</button>  
-      
-      <button type="submit" id="signup" name='signup' >Sign Up</button>    
+      <button type="submit" id="signup" name='signup' >Sign Up</button>  
+
     </div>
     
+    <div id="popUpBox" class="popB">
+      <div class="wordsInPopB">
+        <p id="fullname" ></p>
+      </div>
+
+
+    </div>
     <!-- <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div> -->
     <div id="my-signin2"></div>
     <script>
       function onSuccess(googleUser) {
+        //window.onload = function (){
+        var pop = document.getElementById('popUpBox');
+        var name = googleUser.getBasicProfile().getName();
+        var wel = "Welcome ";
         console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+        console.log(name);
+        
+        alert(wel.concat(name.toString()));
+        //pop.style.display = "block";
+        //document.getElementById("fullname").innerHTML = wel.concat(name.toString());
+        
+        //popB.style.display = "block";
         onSignIn(googleUser);
+        //}
         //window.location = ("./AccountInformation.html");
+        //}
       }
       function onFailure(error) {
         console.log(error);
