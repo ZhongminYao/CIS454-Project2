@@ -1,40 +1,43 @@
 
 
-<!DOCTYPE html>\
-<html>\
-<head>\
-<title>Page Title</title>\
-
-<script>
-  // Initialize Firebase
-
-  var config = {
-    apiKey: "AIzaSyCJRvvsqkPq45KpBQ_k57bzG8a36IASZEg",
-    authDomain: "volunteering-454.firebaseapp.com",
-    databaseURL: "https://volunteering-454.firebaseio.com",
-    projectId: "volunteering-454",
-    storageBucket: "volunteering-454.appspot.com",
-    messagingSenderId: "470008611776"
-  };
-  firebase.initializeApp(config);
-</script>
-
-</head>\
-
-
-<body>\
-\
-<div class="g-signin2" data-onsuccess="onSignIn"></div>
-<h1>Account Informationnnn</h1>\
-<p style="background-color:DodgerBlue;">Customer Information</p>\
-<p>Name: </p>\
-<p>E-mail Address: </p>\
-<p>Phone Number:   </p>\
-<p style="background-color:DodgerBlue;"> History Event <p>\
-<p> Past one week: </p>\
-<p> Past One Month: <p>\
-<p> Past One Year: </p>\
-\
-</body>\
-</html>\
-}
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style>
+	body{margin:0;padding:0;width:100%}
+	.input{width:300px;height:40px;border-radius:5px;border-color: #A7DDF9;margin:10px;}
+	.block{margin:20px auto;width:500px;}
+	h1,h3{text-align:center;}
+	.rec{display:block;height:50px;}
+  </style>
+  <script>
+	function edit(){
+		var	input=document.getElementsByTagName("input");
+		for(var j = 0; j < input.length; j++){  
+			input[j].readOnly=false;
+	  	}
+	}
+  </script>
+ </head>
+ <body>
+	<h1>Account Information<a onclick="edit()"><img width="16px" style="display:inline-block;cursor:pointer" src="edit.png"/></a></h2>
+	<div class="block">
+		<h3>Customer Information</h3>
+		User &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name:<input class="input" type="text" readonly value="Regent Wan"/><br>
+		E-mail Address:<input class="input" type="text" readonly value="yufeng@qq.com"/><br>
+		Phone Number:<input class="input" type="text" readonly value="18282956853"/><br>
+	</div>
+	<div class="block">
+		<h3>History Event</h3>
+		Past One Week:<span class="rec"></span><br>
+		Past One Month:<span class="rec"></span><br>
+		Past One Year:<span class="rec"></span><br>
+	</div>
+ </body>
+</html>
