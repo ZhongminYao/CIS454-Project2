@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title> View Event Page</title>
+    <link rel="stylesheet" type="text/css" href="css/viewEvent.css">
+    <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
+
+
+
+  </head>
+
+  <body>
+    <div class="inputBox">
+      <h1> View Event Page </h1>
+      <input type="image" id="google_signin" alt="google_signin" src="img/back2.png" style="height:30px;" onclick="goBack()">
+      <form id="add-event-form">
+        
+      </form>
+
+      <ul id="event-list"></ul>
+
+    </div>
+
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCJRvvsqkPq45KpBQ_k57bzG8a36IASZEg",
+        authDomain: "volunteering-454.firebaseapp.com",
+        databaseURL: "https://volunteering-454.firebaseio.com",
+        projectId: "volunteering-454",
+        storageBucket: "volunteering-454.appspot.com",
+        messagingSenderId: "470008611776"
+      };
+      // refer to https://github.com/iamshaunjp/firebase-firestore-playlist/tree/lesson-9
+      firebase.initializeApp(config);
+      const db = firebase.firestore();
+      db.settings({ timestampsInSnapshots: true });
+
+      function goBack() {
+        window.location.href = "Landing2.html";
+      }
+
+    </script>
+
+    <script src="js/add3.js"></script>
+
+
+  </body>
+
+</html>

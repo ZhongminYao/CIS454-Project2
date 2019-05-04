@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title> Add Event Page</title>
+    <link rel="stylesheet" type="text/css" href="css/style-AddEvent.css">
+    <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-firestore.js"></script>
+
+
+
+  </head>
+
+  <body>
+    <div class="inputBox">
+      
+      <h1> Add Event Page </h1>
+      <form id="add-event-form">
+        <input type="text" name="name" id="name" placeholder="Input event name">
+
+        <input type="text" name="date" id="date" placeholder="Input event date">
+        <input type="text" name="des" id="des" placeholder="Input event descrption">
+        <button id="btn">Add Event</button>
+        <input type="image" id="google_btn" alt="google_signin" src="img/back2.png" style="height:30px;" onclick="goBack()">
+      </form>
+
+     
+
+    </div>
+
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCJRvvsqkPq45KpBQ_k57bzG8a36IASZEg",
+        authDomain: "volunteering-454.firebaseapp.com",
+        databaseURL: "https://volunteering-454.firebaseio.com",
+        projectId: "volunteering-454",
+        storageBucket: "volunteering-454.appspot.com",
+        messagingSenderId: "470008611776"
+      };
+      // refer to https://github.com/iamshaunjp/firebase-firestore-playlist/tree/lesson-9
+      firebase.initializeApp(config);
+      const db = firebase.firestore();
+      db.settings({ timestampsInSnapshots: true });
+
+      function goBack() {
+        window.location.href = "Landing2.html";
+      }
+
+    </script>
+
+    <script src="js/add.js"></script>
+
+
+  </body>
+
+</html>

@@ -1,0 +1,192 @@
+/* this page refer to https://www.youtube.com/watch?v=HV7DtH3J2PU*/
+#app h1{
+  font:weight;
+  font-size: 2.5em;
+  font-style: italic;
+  text-transform: capitalize;
+  font-weight: 1000;
+  color: white;
+  text-align: center;
+
+}
+
+body{
+    background: #50a3a2;
+    background: -webkit-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
+    /*background color refer to https://blog.csdn.net/L_BestCoder/article/details/51234512  */
+    z-index: 2;
+    font-family: "Times New Roman", Times, serif;
+}
+
+
+.inputBox{
+  width: 500px;
+  padding: 80px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+}
+
+b{  
+	color:white;
+	font-style: italic;
+	font-weight: 1000;
+
+}
+
+.inputBox input[id = "email"]{
+  border: 2px solid #5c85d6;
+  display: block;
+  margin: 1.5em auto;
+  text-align: center;
+  padding: 10px 20px;
+  width: 15em;
+  border-radius: 2.5em;
+  transition: 0.3s;
+  z-index: 2;
+}
+
+.inputBox input[id = "email"]:focus{
+  width: 25em;
+  border: 2px solid #5c85d6;
+  z-index: 2;
+}
+
+.inputBox input[id = "psw"]{
+  border: 2px solid #5c85d6;
+  display: block;
+  margin: 1.5em auto;
+  text-align: center;
+  padding: 10px 20px;
+  width: 15em;
+  border-radius: 2.5em;
+  transition: 0.3s;
+  z-index: 2;
+}
+
+.inputBox input[id = "psw"]:focus{
+  width: 25em;
+  border: 2px solid #5c85d6;
+  z-index: 2;
+}
+
+
+.inputBox input[id = "psw2"]{
+  border: 2px solid #5c85d6;
+  display: block;
+  margin: 1.5em auto;
+  text-align: center;
+  padding: 10px 20px;
+  width: 15em;
+  border-radius: 2.5em;
+  transition: 0.3s;
+  z-index: 2;
+}
+
+.inputBox input[id = "psw2"]:focus{
+  width: 25em;
+  border: 2px solid #5c85d6;
+  z-index: 2;
+}
+
+.inputBox input[id = "name_full"]{
+  border: 2px solid #5c85d6;
+  display: block;
+  margin: 1.5em auto;
+  text-align: center;
+  padding: 10px 20px;
+  width: 15em;
+  border-radius: 2.5em;
+  transition: 0.3s;
+  z-index: 2;
+}
+
+.inputBox input[id = "name_full"]:focus{
+  width: 25em;
+  border: 2px solid #5c85d6;
+  z-index: 2;
+}
+
+.inputBox input[id = "gender"]{
+  border: 2px solid #5c85d6;
+  display: block;
+  margin: 1.5em auto;
+  text-align: center;
+  padding: 10px 20px;
+  width: 15em;
+  border-radius: 2.5em;
+  transition: 0.3s;
+  z-index: 2;
+}
+
+.inputBox input[id = "gender"]:focus{
+  width: 25em;
+  border: 2px solid #5c85d6;
+  z-index: 2;
+}
+
+
+.inputBox input[id = "age"]{
+  border: 2px solid #5c85d6;
+  margin: 1.5em auto;
+  text-align: center;
+  padding: 5px 7px;
+  width: 3em;
+  border-radius: 2.5em;
+  transition: 0.3s;
+  z-index: 2;
+}
+
+
+
+
+
+.inputBox button[id = "cancel"]{
+  border: 2px solid #5c85d6;
+  display: block;
+  text-align: center;
+  padding: 10px 20px;
+  margin: 1em auto;
+  width: 8em;
+  border-radius: 2.5em;
+  transition: 0.3s;
+  z-index: 2;
+}
+
+.inputBox button[id = "cancel"]:hover{
+  width: 10em;
+  padding: 15px 20px;
+  background: white;
+  border: 3px solid #5c85d6;
+  z-index: 2;
+}
+.inputBox button[id = "sign"]{
+   border: 2px solid #5c85d6;
+  display: block;
+  text-align: center;
+  padding: 10px 20px;
+  margin: 1em auto;
+  width: 8em;
+  border-radius: 2.5em;
+  transition: 0.3s;
+  z-index: 2;
+}
+
+.inputBox button[id = "sign"]:hover{
+   width: 10em;
+  padding: 15px 20px;
+  background: white;
+  border: 3px solid #5c85d6;
+  z-index: 2;
+}
+
+select{
+ margin-top:10px;
+ margin-bottom: 20px;
+
+
+}
+

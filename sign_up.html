@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Register Page</title>
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <link rel="stylesheet" type="text/css" href="css/sign_up.css">
+    <!--<script src=sign_all.js></script> -->
+  </head>
+  <!-- the authetication method is learned from https://firebase.google.com/docs/guides -->
+  <body>
+    <div class="inputBox">
+      <div id="app">
+        <h1>Register Page:</h1>
+        <div>
+          <label for="email"><b>Email</b></label>
+          <input type="email" id="email" placeholder="Type your email" required>
+
+          <label for="psw"><b>Password</b></label>
+          <input type="password" id="psw" placeholder="Enter Password" required>
+
+          <label for="psw-repeat"><b>Repeat Password</b></label>
+          <input type="password" id="psw2" placeholder="Repeat Password" required>
+
+          <label for="name_full"><b>Full Name</b></label>
+          <input type="text" id="name_full" placeholder="Enter Your Full Name" required>
+
+
+
+          <label for="Age"><b>Age</b></label>
+          <input type="number" id="age" placeholder="Enter Age" value="20" min="10" max="40" required>
+
+          <label for="gender"><b>Gender</b></label>
+          <!--<input type="text" id = "gender" placeholder="Enter Gender"  required> -->
+
+          <select id="gender">
+            <option>Male</option>
+            <option>Female</option>
+            <option>Secret</option>
+          </select>
+
+
+          <button type="button" id="cancel" onclick="goBack()" class="cancelbtn">Cancel</button>
+          <button type="submit" id="sign" onclick="register()" class="signupbtn">Sign Up</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCJRvvsqkPq45KpBQ_k57bzG8a36IASZEg",
+        authDomain: "volunteering-454.firebaseapp.com",
+        databaseURL: "https://volunteering-454.firebaseio.com",
+        projectId: "volunteering-454",
+        torageBucket: "volunteering-454.appspot.com",
+        messagingSenderId: "470008611776"
+      };
+      firebase.initializeApp(config);
+
+      async function register() {
+        var empty = checkEmpty();
+        if (empty) {
+          alert("please fill all fields");
+        }
+        else {
+          var email = document.getElementById('email').value;
+          var psw = document.getElementById('psw').value;
+          var psw2 = document.getElementById('psw2').value;
+          console.log(psw);
+          console.log(psw2);
+          if (psw == psw2) {
+            console.log("create user")
+            await firebase.auth().createUserWithEmailAndPassword(email, psw)
+              .catch(error => alert(error.message))
+            console.log("Created")
+          }
+          else {
+            alert("check your password!")
+          }
+          await sendEmail();
+          await writeData();
+          //await goVolunteer();
+        }
+      }
+
+      function checkEmpty() {
+        var name_full = document.getElementById('name_full').value;
+        var gender = document.getElementById('gender').value;
+        var age = document.getElementById('age').value;
+
+        if (name_full !== '' && gender !== '' && age !== '') {
+          return false;
+        }
+        else {
+          return true;
+        }
+      }
+
+      /*
+      function goVolunteer() {
+        window.location.href = 'Landing1.html';
+      }
+      */
+
+      async function writeData() {
+        var name_full = document.getElementById('name_full').value;
+        var gender = document.getElementById('gender').value;
+        var age = document.getElementById('age').value;
+        var email = document.getElementById('email').value;
+        var user_uid = firebase.auth().currentUser.uid;
+        var userRef = firebase.database().ref(`user/${user_uid}`);
+
+        await userRef.update({
+          name: name_full,
+          gender: gender,
+          age: age,
+          email: email,
+          uid: user_uid,
+          role: 'volunteer',
+          events: {
+            name: 'default'
+          }
+        })
+
+        console.log('finish data write');
+        window.location.href = 'Landing1.html';
+
+        /*
+        userRef.set ({
+          [user_uid]: {
+            name: name_full,
+            gender: gender,
+            age: age,
+            email: email,
+            uid: user_uid,
+            role: 'volunteer',
+            Events: null,      
+          }
+        })
+        */
+
+      }
+
+      async function sendEmail() {
+        var user = firebase.auth().currentUser;
+        await user.sendEmailVerification().then(function () {
+          alert("email is sent");
+        }).catch(function (error) {
+          alert("error");
+        });
+
+      }
+
+      function goBack() {
+        window.location.href = "sign_sum.html";
+      }
+
+      firebase.auth().onAuthStateChanged(user => {
+        this.authUser = user
+        if (user) {
+          alert("you are logged in");
+        }
+      })
+    </script>
+
+  </body>
+
+</html>

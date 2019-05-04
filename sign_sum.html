@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Sign In page</title>
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <link rel="stylesheet" type="text/css" href="css/sign_sum.css">
+    <!--<script src=sign_all.js></script> -->
+  </head>
+  <!-- the authetication method is learned from https://firebase.google.com/docs/guides -->
+  <body>
+    <div class="inputBox">
+      <div id="app">
+        <h1>Welcome to our app</h1>
+        <div>
+          <input type="email" id="email_signin" placeholder="Type your email">
+          <input type="password" id="psw_signin" placeholder="Type your password">
+          <select id="ChooseRole">
+            <option>volunteer</option>
+            <option>coordinator</option>
+          </select>
+          <button onclick="signIn()" id="signin">Sign In</button>
+
+
+
+          <!--
+      <input type="email" v-model="email" placeholder="Type your email">
+      <input type="password" v-model="password" placeholder="Pick your password">
+      -->
+          <button onclick="resetPWD()" id="f">Forgot Password</button>
+          <button onclick="goRegister()" id="signup">Register a new account</button>
+
+          <div>
+            <!--
+      <img src="https://www.gstatic.com/mobilesdk/160512_mobilesdk/auth_service_google.svg" alt="">
+      <button @click="signInWithGoogle"> sign in</button> 
+      -->
+            <input type="image" id="google_btn" alt="google_signin" src="img/google_button.png"
+              onclick="signInWithGoogle()">
+          </div>
+        </div>
+      </div>
+    </div>
+    <ul class="bg-bubbles">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCJRvvsqkPq45KpBQ_k57bzG8a36IASZEg",
+        authDomain: "volunteering-454.firebaseapp.com",
+        databaseURL: "https://volunteering-454.firebaseio.com",
+        projectId: "volunteering-454",
+        storageBucket: "volunteering-454.appspot.com",
+        messagingSenderId: "470008611776"
+      };
+      firebase.initializeApp(config);
+
+      function resetPWD() {
+        var auth = firebase.auth();
+        var email_signin = document.getElementById('email_signin').value;
+        console.log("about to reset pwd");
+
+        auth.sendPasswordResetEmail(email_signin).then(function () {
+          alert("reset password email sent");
+        }).catch(function (error) {
+          alert("error");
+          // An error happened.
+        });
+      }
+
+      function goRegister() {
+        window.location.href = "sign_up.html"
+      }
+
+
+      function register() {
+        var email = document.getElementById('email').value;
+        var psw = document.getElementById('psw').value;
+        var psw2 = document.getElementById('psw2').value;
+        console.log(psw);
+        console.log(psw2);
+        if (psw == psw2) {
+          firebase.auth().createUserWithEmailAndPassword(email, psw)
+            .catch(error => alert(error.message))
+        }
+        else {
+          alert("check your password!")
+        }
+      }
+
+      function goBack() {
+        window.location.href = "sign_sum.html";
+      }
+
+      function signOut() {
+        firebase.auth().signOut()
+      }
+
+      const database = firebase.database();
+      //var database_user = database.ref('');
+
+      function signIn() {
+
+        var role_chosen = document.getElementById("ChooseRole").value;
+        var email_signin = document.getElementById('email_signin').value;
+        var psw_signin = document.getElementById('psw_signin').value;
+        console.log(role_chosen)
+        console.log(email_signin)
+        console.log(psw_signin)
+        //if (role_chosen == "Coordinator") {
+        firebase.auth().signInWithEmailAndPassword(email_signin, psw_signin)
+          .catch(error => alert(error.message))
+        console.log("signed in")
+
+        /*
+        var user_uid = firebase.auth().currentUser.uid;
+        console.log(user_uid);
+        console.log(database.ref(`user`));
+        console.log(database.ref(`user/${user_uid}`));
+
+        if (database.ref(`user/${user_uid}/role`) == 'coordinator') {
+          console.log("ur coordinator");
+        }
+        */
+
+      }
+      // }
+
+      
+      function signInWithGoogle() {
+        const provider = new firebase.auth.GoogleAuthProvider()
+        firebase.auth().signInWithPopup(provider)
+          .catch(error => alert('🤕' + error.message))
+          .then(data => console.log(data.user, data.credential.accessToken))
+      }
+
+      /*
+      firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        var role_chosen = document.getElementById("ChooseRole").value;
+        var user_uid = firebase.auth().currentUser.uid;
+            console.log(user_uid);
+            console.log(database.ref(`user`));
+            console.log(database.ref(`user/${user_uid}`));
+    
+            if (database.ref(`user/${user_uid}/role`) == 'coordinator') {
+              console.log("ur coordinator");
+            }
+        // User is signed in.
+      } else {
+        // No user is signed in.
+      }
+      });
+      */
+
+
+      // the vue frame is learned from https://vueschool.io/courses/vuejs-firebase-authentication
+      new Vue({
+        el: '#app',
+
+        data: {
+          email: '',
+          password: '',
+          displayName: null,
+          photoURL: null,
+          authUser: null
+        },
+
+        methods: {
+          updateProfile() {
+            this.authUser.updateProfile({
+              displayName: this.displayName,
+              photoURL: this.photoURL
+            })
+          }
+        },
+
+
+        async created() {
+          //firebase.auth().onAuthStateChanged(user => { this.authUser = user })
+          firebase.auth().onAuthStateChanged(async user => {
+            this.authUser = user
+            if (user) {
+              var role_chosen = document.getElementById("ChooseRole").value;
+              var user_uid = firebase.auth().currentUser.uid;
+              var users = database.ref(`user`);
+              console.log(database.ref(`user`).child(`i3eK6i9vJpPXyewDV6ceNaAtyti1/role`));
+
+              console.log('start reading')
+
+              var user_data = users.child("i3eK6i9vJpPXyewDV6ceNaAtyti1/role");
+              var user_role = '1';
+              console.log(user_role)
+              /*
+              user_data.on('value', snap => {
+                console.log(inside);
+                user_role = snap.val();
+                console.log(user_role);
+              }
+              )
+              */
+              /*
+               return firebase.database().ref('user/i3eK6i9vJpPXyewDV6ceNaAtyti1/role').once('value').then(function(snapshot) {
+               var user_role = (snapshot.val()) || 'Anonymous';
+               // ...
+               });
+               */
+               // the database method is learned from https://firebase.google.com/docs/guides
+              function getData() {
+                var dbobject = database.ref().child('user').child(`${user_uid}`);
+                return new Promise((res, rej) => {
+                  dbobject.on('value', snap => {
+                    console.log(snap.val());
+                    console.log((snap.val()).role);
+                    user_role = (snap.val()).role;
+                    res(user_role);
+                  });
+                });
+              }
+              var user_role = await getData();
+              console.log("aaaaaaaaaa", user_role);
+              console.log("after reading");
+
+              console.log(role_chosen);
+              //user_role = "coordinator";
+              if (role_chosen == 'coordinator') {
+                if (user_role == role_chosen) {
+                  console.log("ur coordinator");
+                  alert("coordinator")
+                  window.location.href = "Landing2.html";
+                }
+                else {
+                  alert("You are not autheticated as coordinator, but you logged in as volunteer");
+                  window.location.href = "Landing1.html";
+                }
+
+              }
+
+              else {
+                alert("You logged in as volunteer");
+                window.location.href = "Landing1.html";
+              }
+
+
+              /*
+              users.on('value', function(snapshot) {
+                console.log('inside')
+                snapshot.forEach(function(childSnapshot) {
+                  var user_data = childSnapshot.val();
+                  console.log(user_data);
+                });
+    
+            });
+            */
+
+              /*
+              console.log(user_uid);
+              console.log(database.ref(`user`));
+              console.log(database.ref(`user/${user_uid}`));
+              console.log(database.ref(`user/${user_uid}/role`).once('value'));
+      
+              if (database.ref(`user/${user_uid}/role`) == 'coordinator') {
+                console.log("ur coordinator");
+              }
+              */
+
+            }
+            //alert("loged in")
+            //window.location.href = "landing.html"
+          })
+        }
+
+      })
+
+    </script>
+
+  </body>
+
+</html>

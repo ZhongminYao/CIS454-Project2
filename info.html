@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Information Page</title>
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <link rel="stylesheet" type="text/css" href="css/info.css">
+    <!--<script src=sign_all.js></script> -->
+  </head>
+
+  <body>
+    <div class="inputBox">
+      <div id="app">
+        <h1>Information Page:</h1>
+        <div>
+          <label for="name_full"><b>Full Name:  </b></label>
+          <span type="text" id="name_full"> </span>
+          <br></br>
+          <input type="email" id="name_input" placeholder="Change the name here if you need to" required>
+
+          <label for="email"><b>Email:  </b></label>
+          <span type="text" id="email_current"> </span> 
+          <br></br>
+          <!-- <input type="email" id="email" placeholder="Type your email" required> -->
+
+          <label for="role"><b>Role: </b></label>
+          <span type="text" id="role_current"> </span> 
+          <br></br>
+          <!--<input type="role" id="role" placeholder="Your Role" required> -->
+
+          <label for="Age"><b>Age:</b></label>
+          <span type="text" id="age_current"> </span> 
+          <input type="number" id="age" placeholder="Enter Age" value="20" min="10" max="40" required>
+          <br></br>
+
+          <label for="gender"><b>Gender:</b></label>
+          <span type="text" id="gender_current"> </span> 
+          <!--<input type="text" id = "gender" placeholder="Enter Gender"  required> -->
+
+          <select id="gender">
+            <option>Male</option>
+            <option>Female</option>
+            <option>Secret</option>
+          </select>
+          <br></br>
+
+
+          <button type="button" id="submit" onclick="submit()" class="cancelbtn">Update</button>
+          <button type="button" id="cancel" onclick="goBack()" class="cancelbtn">Return</button>
+        </div>
+        <h1>History Event</h1>
+        <p id="stats"></p>
+      </div>
+    </div>
+
+    <script>
+      var config = {
+        apiKey: "AIzaSyCJRvvsqkPq45KpBQ_k57bzG8a36IASZEg",
+        authDomain: "volunteering-454.firebaseapp.com",
+        databaseURL: "https://volunteering-454.firebaseio.com",
+        projectId: "volunteering-454",
+        storageBucket: "volunteering-454.appspot.com",
+        messagingSenderId: "470008611776"
+      };
+      // refer to https://github.com/iamshaunjp/firebase-firestore-playlist/tree/lesson-9
+      firebase.initializeApp(config);
+      
+    </script>
+    <script src="js/info.js"></script>
+  </body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyCJRvvsqkPq45KpBQ_k57bzG8a36IASZEg",
+                authDomain: "volunteering-454.firebaseapp.com",
+                databaseURL: "https://volunteering-454.firebaseio.com",
+                projectId: "volunteering-454",
+                storageBucket: "volunteering-454.appspot.com",
+                messagingSenderId: "470008611776"
+            };
+            firebase.initializeApp(config);
+        </script>
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <title> Volunteer Page</title>
+    </head>
+
+    <body>
+        <h1>Volunteer Home Page </h1>
+        <ul class="nav">
+            <li><a href="volunteer.html">Volunteering Schdule<span></span></a></li>
+            <li><a href="info.html">Account Information<span></span></a></li>
+            <li><a onclick="javascript:firebase.auth().signOut();" href="sign_sum.html">Log Out<span></span></a></li>
+        </ul>
+
+        <ul class="bg-bubbles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+    </body>
+
+
+
+</html>

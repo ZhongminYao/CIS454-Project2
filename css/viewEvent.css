@@ -1,0 +1,161 @@
+/* this page refer to https://www.youtube.com/watch?v=HV7DtH3J2PU*/
+.inputBox h1{
+  font:weight;
+  font-size: 3.5em;
+  font-style: italic;
+  text-transform: capitalize;
+  font-weight: 1000;
+  color: white;
+  text-align: center;
+  width:500px;
+}
+
+input#google_btn{
+  margin-left:570px;
+
+}
+
+body{
+ 
+  font-family: "Times New Roman", Times, serif;
+  background: linear-gradient(to bottom right, #50A3A2, #53E3A6);
+
+ }
+
+ .inputBox{
+  margin: 0px auto;
+  width: 500px;
+  padding: 80px;
+  z-index: 2;
+  
+}
+
+.inputBox input[id = "name"]{
+  border: 2px solid #5c85d6;
+  display: block;
+  margin: 1.5em auto;
+  text-align: center;
+  padding: 10px 20px;
+  width: 15em;
+  border-radius: 2.5em;
+  transition: 0.3s;
+  z-index: 2;
+  text-align: center;
+}
+
+.inputBox input[id = "name"]:focus{
+  width: 25em;
+  border: 2px solid #5c85d6;
+  z-index: 2;
+}
+
+.inputBox input[id = "date"]{
+  border: 2px solid #5c85d6;
+  display: block;
+  margin: 1.5em auto;
+  text-align: center;
+  padding: 10px 20px;
+  width: 15em;
+  border-radius: 2.5em;
+  transition: 0.3s;
+  z-index: 2;
+  text-align: center;
+}
+
+.inputBox input[id = "date"]:focus{
+  width: 25em;
+  border: 2px solid #5c85d6;
+  z-index: 2;
+}
+ 
+.inputBox input[id = "des"]{
+  border: 2px solid #5c85d6;
+  display: block;
+  margin: 1.5em auto;
+  text-align: center;
+  padding: 10px 20px;
+  width: 15em;
+  border-radius: 2.5em;
+  transition: 0.3s;
+  z-index: 2;
+  text-align: center;
+}
+
+.inputBox input[id = "des"]:focus{
+  width: 25em;
+  border: 2px solid #5c85d6;
+  z-index: 2;
+}
+ button[id="btn"]{
+  border: 2px solid #5c85d6;
+  display: block;
+  text-align: center;
+  padding: 10px 20px;
+  margin: 1em auto;
+  width: 10em;
+  border-radius: 2.5em;
+  transition: 0.3s;
+  z-index: 2;
+  text-align: center;
+}
+
+ button[id="btn"]:hover{
+  width: 14em;
+  padding: 15px 20px;
+  background: white;
+  border: 3px solid #5c85d6;
+  z-index: 2;
+}
+
+
+input#google_signin{
+  margin-left:560px;
+
+}
+
+
+ /* ul li part refer to https://github.com/iamshaunjp/firebase-firestore-playlist/tree/lesson-9 */
+ul{
+    width:600px;
+    list-style-type: none;
+    padding: 0;
+    word-wrap:break-word; 
+    word-break:break-all;
+}
+
+li{
+    padding: 20px;
+    background: #f6f6f6;
+    font-size: 20px;
+    color: #555;
+    position: relative;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+li:nth-child(even){
+    padding: 20px;
+    background: #f2f2f2;
+}
+
+li span{
+    display: block;
+}
+
+li span:nth-child(2){
+    font-size: 16px;
+    margin-top: 6px;
+    margin-bottom: 3px;
+    color: #555;
+}
+
+li div{
+    position: absolute;
+    top: 0;
+    right: 0px;
+    background: rgba(255,255,255,0.6);
+    width: 40px;
+    text-align: center;
+    padding: 10px 0;
+    font-weight:  bold;
+    cursor:  pointer;
+}

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Volunteer Page</title>
+    <link rel="stylesheet" type="text/css" href="css/style-vounteer.css">
+
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-firestore.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
+
+  </head>
+
+  <body>
+    <div class="inputBox">
+      <h1> Welcome to Events page </h1>
+      <input type="image" id="google_btn" alt="google_signin" style="height:30px;"src="img/back2.png" onclick="goBack()">
+    
+      <div class="submit">
+        <ul id="event-list"></ul>
+      </div>
+
+    </div>
+
+
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCJRvvsqkPq45KpBQ_k57bzG8a36IASZEg",
+        authDomain: "volunteering-454.firebaseapp.com",
+        databaseURL: "https://volunteering-454.firebaseio.com",
+        projectId: "volunteering-454",
+        storageBucket: "volunteering-454.appspot.com",
+        messagingSenderId: "470008611776"
+      };
+      // refer to https://github.com/iamshaunjp/firebase-firestore-playlist/tree/lesson-9
+      firebase.initializeApp(config);
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          // User is signed in.
+          console.log(firebase.auth().currentUser.uid);
+        } else {
+          // No user is signed in.
+        }
+      });
+
+      const db = firebase.firestore();
+      db.settings({ timestampsInSnapshots: true });
+
+      function goBack() {
+        window.location.href = "Landing1.html";
+      }
+
+      // this document refer to https://www.youtube.com/watch?v=kmTECF0JZyQ
+      const eventList = document.querySelector('#event-list');
+
+      //var doc_temp;
+      async function renderEvent(doc) {
+        // doc_temp = doc;
+        let li = document.createElement('li');
+        let name = document.createElement('span');
+        let date = document.createElement('span');
+        let des = document.createElement('span');
+        let button = document.createElement("button");
+        button.innerHTML = 'select';
+
+        li.setAttribute('data-id', doc.id);
+        name.textContent = `Event Name: ${doc.data().name}`;
+        date.textContent = `Date: ${doc.data().date}`;
+        des.textContent = `Descrption: ${doc.data().des}`;
+        li.appendChild(name);
+        li.appendChild(date);
+        li.appendChild(des);
+        li.appendChild(button);
+
+        eventList.appendChild(li);
+
+        var user_uid = await firebase.auth().currentUser.uid;
+        var database = await firebase.database();
+        var eventRef = database.ref(`user/${user_uid}/events`);
+        var event_signedUp = false;
+        // check if the user has already signed up for the event
+        
+        await eventRef.once("value")
+            .then(function (snapshot) {
+                snapshot.forEach(function (_child) {
+                    var signed_event = _child.key;
+                    //console.log(`signed_event: ${signed_event}`);
+                    //console.log(`name: ${doc.data().name}`);
+                    if (doc.data().name == signed_event) {
+                      //console.log("true");
+                      event_signedUp = true
+                      //console.log(event_signedUp)
+                    }
+                })
+            })
+        
+        // if the user has already signed up for the event, diable the 'select' btn
+        //console.log("button diable")
+        if (event_signedUp) {
+          //console.log("event already signed up")
+          button.disabled = true;
+          let msg = document.createElement('span')
+          msg.textContent = `You already signed up for this event, don't worry!`
+          li.appendChild(msg)
+        }
+
+        button.onclick = async () => {
+          //var user_uid = await firebase.auth().currentUser.uid;
+          var db = await firebase.database();
+          await writeEvent_user(doc, db, user_uid);
+          await writeUser_event(doc, db, user_uid);
+          alert("You signed up for the event, thank you");
+          console.log("finish write");
+          button.disabled = true;
+        }
+      }
+
+      async function writeEvent_user(doc, db, uid) {
+        console.log("start write")
+        var user_uid = uid;
+        var eventRef = db.ref(`user/${user_uid}/events/${doc.data().name}`);
+
+        eventRef.update({
+
+          name: doc.data().name,
+          date: doc.data().date,
+          description: doc.data().des,
+
+        })
+
+      }
+
+
+      async function writeUser_event(doc, db, uid) {
+        console.log("start write user to event")
+        var user_name;
+        var user_uid = await uid;
+
+        var eventBigRef = await db.ref(`event/${doc.data().name}`);
+
+        var dbobject = firebase.database().ref().child('user').child(`${user_uid}`);
+        var promise = await dbobject.on('value', snap => {
+          console.log(snap.val());
+          console.log((snap.val()).name);
+          user_name = (snap.val()).name;
+          eventBigRef.update({
+
+            [user_name]: 'yes',
+
+          })
+        });
+
+
+
+
+        /*eventBigRef.update({
+
+          [user_uid]: 'yes',
+
+        })*/
+      }
+
+
+      db.collection('events').get().then((snapshot) => {
+        snapshot.docs.forEach(doc => {
+          renderEvent(doc);
+        })
+
+      })
+
+
+
+    </script>
+    <!--<script src="js/add2.js"></script>-->
+
+
+  </body>
+
+</html>
