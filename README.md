@@ -6,6 +6,10 @@ A web application that allow coordinator to post new volunteering opportunity, a
 
 The project needs to be running on live server in order to use Google Sign-in authetication. You can download the souce code from https://github.com/ZhongminYao/CIS454-Project2, and running on Virtual Stuido Code with live server extension.
 
+## Accounts For Testing
+* Coordinator Account: test@163.com, 123456
+* Volunteer Account: test2@gmail.com, 123456
+
 ## Deployment
 
 The project has been deployed to the server: https://volunteering-454.firebaseapp.com/
