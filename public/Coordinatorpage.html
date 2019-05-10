@@ -14,18 +14,20 @@
 
   <body>
     <div class="inputBox">
-      
+
       <h1> Add Event Page </h1>
       <form id="add-event-form">
         <input type="text" name="name" id="name" placeholder="Input event name">
-
         <input type="text" name="date" id="date" placeholder="Input event date">
         <input type="text" name="des" id="des" placeholder="Input event descrption">
+        <input type="text" name="ppl" id="ppl" placeholder="Input number of people needed">
         <button id="btn">Add Event</button>
-        <input type="image" id="google_btn" alt="google_signin" src="img/back2.png" style="height:30px;" onclick="goBack()">
       </form>
+        <button id="btn" onclick="reload()">Add New Event</button>
+        <input type="image" id="google_btn" src="img/back2.png" style="height:30px;" onclick="goBack()">
+        
 
-     
+
 
     </div>
 
@@ -46,6 +48,10 @@
 
       function goBack() {
         window.location.href = "Landing2.html";
+      }
+
+      function reload() {
+        location.reload();
       }
 
     </script>

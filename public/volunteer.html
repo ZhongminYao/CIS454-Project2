@@ -16,8 +16,9 @@
   <body>
     <div class="inputBox">
       <h1> Welcome to Events page </h1>
-      <input type="image" id="google_btn" alt="google_signin" style="height:30px;"src="img/back2.png" onclick="goBack()">
-    
+      <input type="image" id="google_btn" alt="google_signin" style="height:30px;" src="img/back2.png"
+        onclick="goBack()">
+
       <div class="submit">
         <ul id="event-list"></ul>
       </div>
@@ -63,6 +64,10 @@
         let name = document.createElement('span');
         let date = document.createElement('span');
         let des = document.createElement('span');
+        let space = document.createElement('span');
+        let ppl = document.createElement('span');
+        let ppl_signed = document.createElement('span');
+        let ppl_stillNeed = document.createElement('span');
         let button = document.createElement("button");
         button.innerHTML = 'select';
 
@@ -70,33 +75,62 @@
         name.textContent = `Event Name: ${doc.data().name}`;
         date.textContent = `Date: ${doc.data().date}`;
         des.textContent = `Descrption: ${doc.data().des}`;
+        space.innerHTML = `<br>`;
+        ppl.textContent = `People needed: ${doc.data().ppl}`;
+        ppl_signed_num = await getPplSigned();
+        ppl_signed.textContent = `People already signed for the event: ${ppl_signed_num}`;
+        var ppl_numNeeded = doc.data().ppl - ppl_signed_num;
+        ppl_stillNeed.textContent = `People still needed for the event: ${ppl_numNeeded}`;
         li.appendChild(name);
         li.appendChild(date);
         li.appendChild(des);
+        li.appendChild(space);
+        li.appendChild(ppl);
+        li.appendChild(ppl_signed);
+        li.appendChild(ppl_stillNeed);
         li.appendChild(button);
 
         eventList.appendChild(li);
 
+        if (ppl_numNeeded == 0 ) {
+          button.disabled = true;
+        }
         var user_uid = await firebase.auth().currentUser.uid;
         var database = await firebase.database();
         var eventRef = database.ref(`user/${user_uid}/events`);
         var event_signedUp = false;
         // check if the user has already signed up for the event
-        
-        await eventRef.once("value")
+
+        async function getPplSigned() {
+          var user_uid = await firebase.auth().currentUser.uid;
+          var eventRef = await firebase.database().ref(`event/${doc.data().name}`);
+          var ppl_count = 0;
+          await eventRef.once("value")
             .then(function (snapshot) {
-                snapshot.forEach(function (_child) {
-                    var signed_event = _child.key;
-                    //console.log(`signed_event: ${signed_event}`);
-                    //console.log(`name: ${doc.data().name}`);
-                    if (doc.data().name == signed_event) {
-                      //console.log("true");
-                      event_signedUp = true
-                      //console.log(event_signedUp)
-                    }
-                })
+              snapshot.forEach(function (_child) {
+                var participant_event = _child.key;
+                console.log(participant_event);
+                ppl_count++;
+              })
             })
-        
+          console.log(ppl_count)
+          return ppl_count;
+        }
+
+        await eventRef.once("value")
+          .then(function (snapshot) {
+            snapshot.forEach(function (_child) {
+              var signed_event = _child.key;
+              //console.log(`signed_event: ${signed_event}`);
+              //console.log(`name: ${doc.data().name}`);
+              if (doc.data().name == signed_event) {
+                //console.log("true");
+                event_signedUp = true
+                //console.log(event_signedUp)
+              }
+            })
+          })
+
         // if the user has already signed up for the event, diable the 'select' btn
         //console.log("button diable")
         if (event_signedUp) {
@@ -115,6 +149,7 @@
           alert("You signed up for the event, thank you");
           console.log("finish write");
           button.disabled = true;
+          location.reload();
         }
       }
 

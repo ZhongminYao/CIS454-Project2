@@ -85,6 +85,26 @@ body{
   border: 2px solid #5c85d6;
   z-index: 2;
 }
+
+.inputBox input[id = "ppl"]{
+  border: 2px solid #5c85d6;
+  display: block;
+  margin: 1.5em auto;
+  text-align: center;
+  padding: 10px 20px;
+  width: 15em;
+  border-radius: 2.5em;
+  transition: 0.3s;
+  z-index: 2;
+  text-align: center;
+}
+
+.inputBox input[id = "ppl"]:focus{
+  width: 25em;
+  border: 2px solid #5c85d6;
+  z-index: 2;
+}
+
  button[id="btn"]{
   border: 2px solid #5c85d6;
   display: block;

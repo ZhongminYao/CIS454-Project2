@@ -10,6 +10,7 @@
     <!--<script src=sign_all.js></script> -->
   </head>
   <!-- the authetication method is learned from https://firebase.google.com/docs/guides -->
+
   <body>
     <div class="inputBox">
       <div id="app">
@@ -124,6 +125,7 @@
         firebase.auth().signInWithEmailAndPassword(email_signin, psw_signin)
           .catch(error => alert(error.message))
         console.log("signed in")
+        console.log(firebase.auth().currentUser.uid)
 
         /*
         var user_uid = firebase.auth().currentUser.uid;
@@ -171,22 +173,10 @@
         el: '#app',
 
         data: {
-          email: '',
-          password: '',
-          displayName: null,
-          photoURL: null,
-          authUser: null
         },
 
         methods: {
-          updateProfile() {
-            this.authUser.updateProfile({
-              displayName: this.displayName,
-              photoURL: this.photoURL
-            })
-          }
         },
-
 
         async created() {
           //firebase.auth().onAuthStateChanged(user => { this.authUser = user })
@@ -196,30 +186,14 @@
               var role_chosen = document.getElementById("ChooseRole").value;
               var user_uid = firebase.auth().currentUser.uid;
               var users = database.ref(`user`);
-              console.log(database.ref(`user`).child(`i3eK6i9vJpPXyewDV6ceNaAtyti1/role`));
 
               console.log('start reading')
+              console.log(database.ref().child('user').child(`${user_uid}`))
 
-              var user_data = users.child("i3eK6i9vJpPXyewDV6ceNaAtyti1/role");
-              var user_role = '1';
-              console.log(user_role)
-              /*
-              user_data.on('value', snap => {
-                console.log(inside);
-                user_role = snap.val();
-                console.log(user_role);
-              }
-              )
-              */
-              /*
-               return firebase.database().ref('user/i3eK6i9vJpPXyewDV6ceNaAtyti1/role').once('value').then(function(snapshot) {
-               var user_role = (snapshot.val()) || 'Anonymous';
-               // ...
-               });
-               */
-                // the database method is learned from https://firebase.google.com/docs/guides
+              // the database method is learned from https://firebase.google.com/docs/guides
               function getData() {
                 var dbobject = database.ref().child('user').child(`${user_uid}`);
+                console.log("reading user role")
                 return new Promise((res, rej) => {
                   dbobject.on('value', snap => {
                     console.log(snap.val());
@@ -229,7 +203,8 @@
                   });
                 });
               }
-              var user_role = await getData();
+              var user_role =  await getData();
+              //var user_role = await getData();
               console.log("aaaaaaaaaa", user_role);
               console.log("after reading");
 
@@ -238,7 +213,7 @@
               if (role_chosen == 'coordinator') {
                 if (user_role == role_chosen) {
                   console.log("ur coordinator");
-                  alert("coordinator")
+                  alert("You signed in as coordinator")
                   window.location.href = "Landing2.html";
                 }
                 else {
@@ -253,32 +228,7 @@
                 window.location.href = "Landing1.html";
               }
 
-
-              /*
-              users.on('value', function(snapshot) {
-                console.log('inside')
-                snapshot.forEach(function(childSnapshot) {
-                  var user_data = childSnapshot.val();
-                  console.log(user_data);
-                });
-    
-            });
-            */
-
-              /*
-              console.log(user_uid);
-              console.log(database.ref(`user`));
-              console.log(database.ref(`user/${user_uid}`));
-              console.log(database.ref(`user/${user_uid}/role`).once('value'));
-      
-              if (database.ref(`user/${user_uid}/role`) == 'coordinator') {
-                console.log("ur coordinator");
-              }
-              */
-
             }
-            //alert("loged in")
-            //window.location.href = "landing.html"
           })
         }
 

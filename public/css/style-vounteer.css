@@ -68,7 +68,12 @@ li span:nth-child(2){
     color: #999;
 }
 
-li span:nth-child(5){
+li span:nth-child(7){
+  
+  color:red;
+}
+
+li span:nth-child(9){
   
   color:red;
 }

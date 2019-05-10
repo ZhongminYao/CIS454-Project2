@@ -4,7 +4,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 
     console.log(firebase.auth().currentUser.uid);
     readData();
-    
+
   } else {
     // No user is signed in.
   }
@@ -118,19 +118,74 @@ async function readData() {
   var eventRef = db.ref(`user/${user_uid}/events`);
   console.log(eventRef.getKey());
 
-  eventRef.once("value")
-      .then(function (snapshot) {
-          snapshot.forEach(function (_child) {
-              var participated_event = _child.key;
-              console.log(participated_event);
-              let participated = document.createElement('span');
-              participated.innerHTML = `Participated Event Name: ${participated_event} <br>`;
+  await eventRef.once("value")
+    .then(async function (snapshot) {
+      var object_list = [];
+      snapshot.forEach(function (_child) {
+        {
 
-              append(ul, participated);
+          var participated_event = _child.key;
+          console.log(participated_event);
+          object_list.push(participated_event);
+
+          /*
+          let participated = document.createElement('span');
+          var event_date;
+          if (participated_event != 'name') {
             
-          
-          })
+            var eventRef = firebase.database().ref(`user/${user_uid}/events/${participated_event}`);
+            function getEventDate() {
+              return new Promise((res, rej) => {
+                eventRef.on('value', snap => {
+                  console.log((snap.val()).date);
+                  event_date = (snap.val()).date;
+                  res(event_date);
+                });
+              });
+            }
+            event_date =  getEventDate();
+            
+            
+            //participated.innerHTML = `Participated Event Name: ${participated_event} on the date of ${event_date} <br>`;
+            participated.innerHTML = `Participated Event Name: ${participated_event} <br>`;
+          }
+  
+  
+          append(ul, participated);
+          */
+
+
+
+        }
       })
+      console.log(object_list)
+      object_list.forEach(async function (element) {
+        let participated = document.createElement('span');
+        var event_date;
+        if (element != 'name') {
+
+          var eventRef = firebase.database().ref(`user/${user_uid}/events/${element}`);
+          function getEventDate() {
+            return new Promise((res, rej) => {
+              eventRef.on('value', snap => {
+                console.log((snap.val()).date);
+                event_date = (snap.val()).date;
+                res(event_date);
+              });
+            });
+          }
+          event_date = await getEventDate();
+
+
+          participated.innerHTML = `Participated Event Name: ${element} on the date of ${event_date} <br>`;
+          //participated.innerHTML = `Participated Event Name: ${participated_event} <br>`;
+        }
+
+
+        append(ul, participated);
+      })
+
+    })
 }
 
 async function submit() {
