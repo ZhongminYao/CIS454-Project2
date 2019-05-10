@@ -125,7 +125,7 @@
         firebase.auth().signInWithEmailAndPassword(email_signin, psw_signin)
           .catch(error => alert(error.message))
         console.log("signed in")
-        console.log(firebase.auth().currentUser.uid)
+        //console.log(firebase.auth().currentUser.uid)
 
         /*
         var user_uid = firebase.auth().currentUser.uid;
@@ -191,11 +191,13 @@
               console.log(database.ref().child('user').child(`${user_uid}`))
 
               // the database method is learned from https://firebase.google.com/docs/guides
+
               function getData() {
                 var dbobject = database.ref().child('user').child(`${user_uid}`);
                 console.log("reading user role")
                 return new Promise((res, rej) => {
                   dbobject.on('value', snap => {
+                    console.log("inside object")
                     console.log(snap.val());
                     console.log((snap.val()).role);
                     user_role = (snap.val()).role;
@@ -203,7 +205,22 @@
                   });
                 });
               }
-              var user_role =  await getData();
+
+              /*
+               async function getData() {
+                 var dbobject = database.ref().child('user').child(`${user_uid}`);
+                 console.log(dbobject);
+                 console.log("reading user role")
+                 return dbobject.once('value').then(function (snapshot) {
+                   console.log("inside object")
+                   var username = (snapshot.val() && snapshot.val().role) || 'unknown role';
+                   // ...
+                 });
+ 
+               }
+               */
+
+              var user_role = await getData();
               //var user_role = await getData();
               console.log("aaaaaaaaaa", user_role);
               console.log("after reading");
